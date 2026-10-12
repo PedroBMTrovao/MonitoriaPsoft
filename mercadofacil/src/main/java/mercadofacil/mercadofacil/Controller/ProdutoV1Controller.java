@@ -34,5 +34,23 @@ public class ProdutoV1Controller {
                 .body(produtoCrudService.buscarTodosProdutos());
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ProdutoResponseDto> atualizarProduto(
+            @PathVariable Long id, 
+            @RequestBody @Valid ProdutoPostPutDto produtoPostPutDto) {
+        return ResponseEntity
+            .status(HttpStatus.OK)
+            .body(produtoCrudService.atualizarProduto(id, produtoPostPutDto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarProduto(@PathVariable Long id) {
+        produtoCrudService.deletarProduto(id);
+        return ResponseEntity
+            .status(HttpStatus.NO_CONTENT)
+            .build();
+    }
+
+
 
 }
